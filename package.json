@@ -1,24 +1,24 @@
 {
-  "name": "api1",
-  "version": "1.0.0",
-  "description": "\"My first api with node.js + express\"",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [
-    "api",
-    "express",
-    "node.js",
-    "server"
-  ],
-  "author": "Arshia Shahidi",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  }
+    "name": "api1",
+    "version": "1.0.0",
+    "description": "\"My first api with node.js + express\"",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "keywords": [
+        "api",
+        "express",
+        "node.js",
+        "server"
+    ],
+    "author": "Arshia Shahidi",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
 }

@@ -3,13 +3,11 @@
 
 const express = require("express");
 const app = express();
+const fs = require('fs');
 
-let words = {
-    "rainbow": 4,
-    "unicorn": 5,
-    "doom": -3,
-    "gloom": -2
-}
+let data = fs.readFileSync('words.json')
+let words = JSON.parse(data)
+console.log(words)
 
 // Static files
 app.use(express.static('public'));
@@ -18,9 +16,8 @@ app.use(express.static('public'));
 app.get('/add/:word/:score?', addWord);
 
 function addWord(request, response) {
-    let data = request.params;
-    let word = data.word;
-    let score = Number(data.score);
+    let word = request.params.word;
+    let score = Number(request.params.score);
 
     let reply;
     if(!score) {
@@ -29,11 +26,25 @@ function addWord(request, response) {
         }
     } else {
         words[word] = score;
-        reply = {
-            msg: "Thank you for your word."
-        }     
+        let data = JSON.stringify(words)   
+
+        fs.writeFile('words.json', data, finished)
+
+        function finished(err) {
+            if (!err) {
+                console.log(`Succesfully adding the ${word}: ${score} to the database.`)
+                reply = {
+                    word: word,
+                    score: score,
+                    status: "success"
+                }  
+                console.log(data);
+                response.send(reply)
+            } else {
+                console.log(err)
+            }
+        }
     }
-    response.send(reply)
 } 
 
 app.get('/search/:word', searchWord);
