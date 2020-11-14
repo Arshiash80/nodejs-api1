@@ -4,6 +4,7 @@
 const express = require("express");
 const app = express();
 const fs = require('fs');
+const bodyParser = require("body-parser")
 
 let data = fs.readFileSync('words.json')
 let words = JSON.parse(data)
@@ -12,10 +13,15 @@ console.log("Current data base: ",words)
 // Static files
 app.use(express.static('public'));
 
-// Server gets that :flower as a prameter part of the request.
+// Init body-parser
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+// get :word and :score as parameter and save in database.
 app.get('/add/:word/:score?', addWord);
 
 function addWord(request, response) {
+    console.log(request.params)
     let word = request.params.word;
     let score = Number(request.params.score);
 
