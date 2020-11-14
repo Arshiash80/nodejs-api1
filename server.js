@@ -7,7 +7,7 @@ const fs = require('fs');
 
 let data = fs.readFileSync('words.json')
 let words = JSON.parse(data)
-console.log(words)
+console.log("Current data base: ",words)
 
 // Static files
 app.use(express.static('public'));
@@ -32,19 +32,18 @@ function addWord(request, response) {
 
         function finished(err) {
             if (!err) {
-                console.log(`Succesfully adding the ${word}: ${score} to the database.`)
                 reply = {
                     word: word,
                     score: score,
                     status: "success"
                 }  
                 console.log(data);
-                response.send(reply)
             } else {
                 console.log(err)
             }
         }
     }
+    response.send(reply)
 } 
 
 app.get('/search/:word', searchWord);
